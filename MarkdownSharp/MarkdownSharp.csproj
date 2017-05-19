@@ -2,6 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>0.1.0</Version>
+    <Company>Jason Gaylord</Company>
+    <Authors>Jason Gaylord, Jeff Atwood, Milan Negovan, John Gruber</Authors>
+    <Description>MarkdownSharp is a Markdown library to transform Markdown to HTML</Description>
+    <Copyright />
+    <PackageLicenseUrl>https://github.com/jasongaylord/markdownsharp/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/jasongaylord/markdownsharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jasongaylord/markdownsharp</RepositoryUrl>
+    <PackageTags>markdown</PackageTags>
+    <RepositoryType>Git</RepositoryType>
+    <PackageId>MarkdownSharpCore</PackageId>
+    <Product>MarkdownSharpCore</Product>
   </PropertyGroup>
 
 </Project>
