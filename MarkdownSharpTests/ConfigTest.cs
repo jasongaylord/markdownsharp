@@ -1,22 +1,25 @@
-using System.Configuration;
-using MarkdownSharp;
-using NUnit.Framework;
+﻿using MarkdownSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace MarkdownSharpTests
 {
-    [TestFixture]
+    [TestClass]
     public class ConfigTest
     {
-        [Test]
+        [TestMethod]
         public void TestLoadFromConfiguration()
         {
-            var settings = ConfigurationManager.AppSettings;
-            settings.Set("Markdown.AutoHyperlink", "true");
-            settings.Set("Markdown.AutoNewlines", "true");
-            settings.Set("Markdown.EmptyElementSuffix", ">");
-            settings.Set("Markdown.LinkEmails", "false");
-            settings.Set("Markdown.StrictBoldItalic", "true");
-            
+            /// TODO Update the test loader to inject options
+            var settings = new Dictionary<string, string>(); // ConfigurationManager.AppSettings;
+            settings.Add("Markdown.AutoHyperlink", "true");
+            settings.Add("Markdown.AutoNewlines", "true");
+            settings.Add("Markdown.EmptyElementSuffix", ">");
+            settings.Add("Markdown.LinkEmails", "false");
+            settings.Add("Markdown.StrictBoldItalic", "true");
+
             var markdown = new Markdown(true);
             Assert.AreEqual(true, markdown.AutoHyperlink);
             Assert.AreEqual(true, markdown.AutoNewLines);
@@ -25,10 +28,10 @@ namespace MarkdownSharpTests
             Assert.AreEqual(true, markdown.StrictBoldItalic);
         }
 
-        [Test]
+        [TestMethod]
         public void TestNoLoadFromConfigFile()
         {
-            foreach (var markdown in new[] {new Markdown(), new Markdown(false)})
+            foreach (var markdown in new[] { new Markdown(), new Markdown(false) })
             {
                 Assert.AreEqual(false, markdown.AutoHyperlink);
                 Assert.AreEqual(false, markdown.AutoNewLines);
@@ -38,17 +41,17 @@ namespace MarkdownSharpTests
             }
         }
 
-        [Test]
+        [TestMethod]
         public void TestAutoHyperlink()
         {
-            var markdown = new Markdown();  
+            var markdown = new Markdown();
             Assert.IsFalse(markdown.AutoHyperlink);
             Assert.AreEqual("<p>foo http://example.com bar</p>\n", markdown.Transform("foo http://example.com bar"));
             markdown.AutoHyperlink = true;
             Assert.AreEqual("<p>foo <a href=\"http://example.com\">http://example.com</a> bar</p>\n", markdown.Transform("foo http://example.com bar"));
         }
 
-        [Test]
+        [TestMethod]
         public void TestAutoNewLines()
         {
             var markdown = new Markdown();
@@ -58,7 +61,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual("<p>Line1<br />\nLine2</p>\n", markdown.Transform("Line1\nLine2"));
         }
 
-        [Test]
+        [TestMethod]
         public void TestEmptyElementSuffix()
         {
             var markdown = new Markdown();
@@ -68,17 +71,17 @@ namespace MarkdownSharpTests
             Assert.AreEqual("<hr>\n", markdown.Transform("* * *"));
         }
 
-        [Test]
+        [TestMethod]
         public void TestLinkEmails()
         {
             var markdown = new Markdown();
             Assert.IsTrue(markdown.LinkEmails);
-            Assert.AreEqual("<p><a href=\"&#", markdown.Transform("<aa@bb.com>").Substring(0,14));
+            Assert.AreEqual("<p><a href=\"&#", markdown.Transform("<aa@bb.com>").Substring(0, 14));
             markdown.LinkEmails = false;
             Assert.AreEqual("<p><aa@bb.com></p>\n", markdown.Transform("<aa@bb.com>"));
         }
 
-        [Test]
+        [TestMethod]
         public void TestStrictBoldItalic()
         {
             var markdown = new Markdown();

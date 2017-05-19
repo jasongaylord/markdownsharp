@@ -1,14 +1,14 @@
-﻿using MarkdownSharp;
-using NUnit.Framework;
+using MarkdownSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MarkdownSharpTests
 {
-    [TestFixture]
-    public class SimpleTests : BaseTest
+    [TestClass]
+    public class UnitTest1
     {
         private Markdown m = new Markdown();
 
-        [Test]
+        [TestMethod]
         public void Bold()
         {
             string input = "This is **bold**. This is also __bold__.";
@@ -19,7 +19,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void Italic()
         {
             string input = "This is *italic*. This is also _italic_.";
@@ -30,7 +30,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void Link()
         {
             string input = "This is [a link][1].\n\n  [1]: http://www.example.com";
@@ -41,7 +41,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void LinkBracket()
         {
             string input = "Have you visited <http://www.example.com> before?";
@@ -52,7 +52,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void LinkBare_withoutAutoHyperLink()
         {
             string input = "Have you visited http://www.example.com before?";
@@ -64,7 +64,7 @@ namespace MarkdownSharpTests
         }
 
         /*
-        [Test]
+        [TestMethod]
         public void LinkBare_withAutoHyperLink()
         {
             //TODO: implement some way of setting AutoHyperLink programmatically
@@ -77,7 +77,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }*/
 
-        [Test]
+        [TestMethod]
         public void LinkAlt()
         {
             string input = "Have you visited [example](http://www.example.com) before?";
@@ -88,7 +88,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void Image()
         {
             string input = "An image goes here: ![alt text][1]\n\n  [1]: http://www.google.com/intl/en_ALL/images/logo.gif";
@@ -99,7 +99,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void Blockquote()
         {
             string input = "Here is a quote\n\n> Sample blockquote\n";
@@ -110,7 +110,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void NumberList()
         {
             string input = "A numbered list:\n\n1. a\n2. b\n3. c\n";
@@ -121,7 +121,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void BulletList()
         {
             string input = "A bulleted list:\n\n- a\n- b\n- c\n";
@@ -132,7 +132,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void Header1()
         {
             string input = "#Header 1\nHeader 1\n========";
@@ -143,7 +143,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void Header2()
         {
             string input = "##Header 2\nHeader 2\n--------";
@@ -154,7 +154,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void CodeBlock()
         {
             string input = "code sample:\n\n    <head>\n    <title>page title</title>\n    </head>\n";
@@ -165,7 +165,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void CodeSpan()
         {
             string input = "HTML contains the `<blink>` tag";
@@ -176,7 +176,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void HtmlPassthrough()
         {
             string input = "<div>\nHello World!\n</div>\n";
@@ -187,7 +187,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void Escaping()
         {
             string input = @"\`foo\`";
@@ -198,7 +198,7 @@ namespace MarkdownSharpTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void HorizontalRule()
         {
             string input = "* * *\n\n***\n\n*****\n\n- - -\n\n---------------------------------------\n\n";

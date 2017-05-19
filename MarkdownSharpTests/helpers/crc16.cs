@@ -1,6 +1,9 @@
 ﻿/// <summary>
 /// http://www.sanity-free.org/134/standard_crc_16_in_csharp.html
 /// </summary>
+
+namespace MarkdownSharpTests
+{ 
 public class Crc16
 {
     const ushort polynomial = 0xA001;
@@ -46,4 +49,5 @@ public class Crc16
             table[i] = value;
         }
     }
+}
 }

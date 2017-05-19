@@ -1,10 +1,9 @@
-﻿/* See _CopyrightAndLicense.cs for all copyright and license notes */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Text;
 using System.Text.RegularExpressions;
+
+/* See _CopyrightAndLicense.cs for all copyright and license notes */
 
 namespace MarkdownSharp
 {
@@ -40,9 +39,10 @@ namespace MarkdownSharp
         /// </summary>
         public Markdown(bool loadOptionsFromConfigFile)
         {
+            /// TODO Load config settings from options
             if (!loadOptionsFromConfigFile) return;
 
-            var settings = ConfigurationManager.AppSettings;
+            var settings = new Dictionary<string, string>(); // ConfigurationManager.AppSettings;
             foreach (string key in settings.Keys)
             {
                 switch (key)
@@ -625,7 +625,7 @@ namespace MarkdownSharp
         private static string GetHashKey(string s, bool isHtmlBlock)
         {
             var delim = isHtmlBlock ? 'H' : 'E';
-            return "\x1A" + delim +  Math.Abs(s.GetHashCode()).ToString() + delim;
+            return "\x1A" + delim + Math.Abs(s.GetHashCode()).ToString() + delim;
         }
 
         private static Regex _htmlTokens = new Regex(@"
@@ -897,7 +897,7 @@ namespace MarkdownSharp
             s = EscapeBoldItalic(s);
             s = Regex.Replace(s, @"[\[\]()]", m => _escapeTable[m.ToString()]);
             return s;
-        }            
+        }
 
         private string ImageReferenceEvaluator(Match match)
         {
@@ -1620,10 +1620,10 @@ namespace MarkdownSharp
                 if (token.Type == TokenType.Tag)
                 {
                     value = value.Replace(@"\", _escapeTable[@"\"]);
-                    
+
                     if (_autoHyperlink && value.StartsWith("<!")) // escape slashes in comments to prevent autolinking there -- http://meta.stackexchange.com/questions/95987/html-comment-containing-url-breaks-if-followed-by-another-html-comment
                         value = value.Replace("/", _escapeTable["/"]);
-                    
+
                     value = Regex.Replace(value, "(?<=.)</?code>(?=.)", _escapeTable[@"`"]);
                     value = EscapeBoldItalic(value);
                 }

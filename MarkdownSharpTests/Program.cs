@@ -1,57 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace MarkdownSharpTests
 {
-    class Program
+    public class Program
     {
-
-        static void Main(string[] args)
-        {
-
-            UnitTests();
-
-            //
-            // this is the closest thing to a set of Markdown reference tests I could find
-            //
-            // see http://six.pairlist.net/pipermail/markdown-discuss/2009-February/001526.html
-            // and http://michelf.com/docs/projets/mdtest-1.1.zip
-            // and http://git.michelf.com/mdtest/
-            //
-            Test(@"mdtest-1.1");
-
-            //
-            // see http://six.pairlist.net/pipermail/markdown-discuss/2009-February/001526.html
-            //
-            // "another testsuite I made for testing PHP Markdown which should probably 
-            // apply to any Markdown parser (the PHP Markdown testsuite)"
-            //
-            // NB: these tests are quite tough, many complex edge conditions
-            //
-            //Test(@"php-markdown");
-
-            //
-            // our fledgling internal test suite, primarily to exercise MarkdownSharp specific options
-            //
-            Test(@"mstest-0.1");
-
-            
-            //
-            // pandoc edge condition tests from 
-            // http://code.google.com/p/pandoc/wiki/PandocVsMarkdownPl
-            //
-            //Test(@"pandoc");
-
-            Benchmark();
-
-            //AdHocTest();
-            
-            Console.ReadKey();
-        }
-
         /// <summary>
         /// mini test harness for one-liner Markdown bug repros 
         /// for anything larger, I recommend using the folder based approach and Test()
@@ -74,6 +31,7 @@ namespace MarkdownSharpTests
             Console.WriteLine("output:");
             Console.WriteLine(output);
         }
+
 
         /// <summary>
         /// iterates through all the test files in a given folder and generates file-based output 
@@ -99,7 +57,7 @@ namespace MarkdownSharpTests
             Console.WriteLine(@"MarkdownSharp v" + m.Version + @" test run on " + Path.DirectorySeparatorChar + testfolder);
             Console.WriteLine();
 
-            string path = Path.Combine(ExecutingAssemblyPath, Path.Combine("testfiles", testfolder));
+            string path = Path.Combine(Utilities.ExecutingAssemblyPath, Path.Combine("testfiles", testfolder));
             string output;
             string expected;
             string actualpath;
@@ -108,16 +66,16 @@ namespace MarkdownSharpTests
             int okalt = 0;
             int err = 0;
             int errnew = 0;
-            int total = 0;            
+            int total = 0;
 
             foreach (var file in Directory.GetFiles(path, "*.text"))
             {
 
-                expected = FileContents(Path.ChangeExtension(file, "html"));                
-                output = m.Transform(FileContents(file));
+                expected = Utilities.FileContents(Path.ChangeExtension(file, "html"));
+                output = m.Transform(Utilities.FileContents(file));
 
-                actualpath = Path.ChangeExtension(file, GetCrc16(output) + ".actual.html");
-                
+                actualpath = Path.ChangeExtension(file, Utilities.GetCrc16(output) + ".actual.html");
+
                 total++;
 
                 Console.Write(String.Format("{0:000} {1,-55}", total, Path.GetFileNameWithoutExtension(file)));
@@ -127,7 +85,7 @@ namespace MarkdownSharpTests
                     ok++;
                     Console.WriteLine("OK");
                 }
-                else if (RemoveWhitespace(output) == RemoveWhitespace(expected))
+                else if (Utilities.RemoveWhitespace(output) == Utilities.RemoveWhitespace(expected))
                 {
                     ok++;
                     okalt++;
@@ -136,7 +94,7 @@ namespace MarkdownSharpTests
                         File.WriteAllText(actualpath, output);
                 }
                 else
-                {                    
+                {
                     err++;
                     if (File.Exists(actualpath))
                         Console.WriteLine("Mismatch");
@@ -171,77 +129,6 @@ namespace MarkdownSharpTests
 
         }
 
-        /// <summary>
-        /// removes any empty newlines and any leading spaces at the start of lines 
-        /// all tabs, and all carriage returns
-        /// </summary>
-        public static string RemoveWhitespace(string s)
-        {
-            // Standardize line endings             
-            s = s.Replace("\r\n", "\n");    // DOS to Unix
-            s = s.Replace("\r", "\n");      // Mac to Unix
-
-            // remove any tabs entirely
-            s = s.Replace("\t", "");
-
-            // remove empty newlines
-            s = Regex.Replace(s, @"^\n", "", RegexOptions.Multiline);
-
-            // remove leading space at the start of lines
-            s = Regex.Replace(s, @"^\s+", "", RegexOptions.Multiline);
-
-            // remove all newlines
-            s = s.Replace("\n", "");
-
-            return s;
-        }
-
-
-        /// <summary>
-        /// returns CRC-16 of string as 4 hex characters
-        /// </summary>
-        private static string GetCrc16(string s)
-        {            
-            if (String.IsNullOrEmpty(s)) return "";
-            byte[] b = new Crc16().ComputeChecksumBytes(Encoding.UTF8.GetBytes(s));
-            return b[0].ToString("x2") + b[1].ToString("x2");
-        }
-
-
-        /// <summary>
-        /// returns the contents of the specified file as a string  
-        /// assumes the file is relative to the root of the project
-        /// </summary>
-        static string FileContents(string filename)
-        {
-            try
-            {
-                return File.ReadAllText(Path.Combine(ExecutingAssemblyPath, filename));
-            }
-            catch (FileNotFoundException)
-            {
-                return "";
-            }
-            
-        }
-
-        /// <summary>
-        /// returns the root path of the currently executing assembly
-        /// </summary>
-        static private string ExecutingAssemblyPath
-        {
-            get
-            {
-                string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                // removes executable part
-                path = Path.GetDirectoryName(path);
-                // we're typically in \bin\debug or bin\release so move up two folders
-                path = Path.Combine(path, "..");
-                path = Path.Combine(path, "..");
-                return path;
-            }
-        }
-
 
         /// <summary>
         /// executes a standard benchmark on short, medium, and long markdown samples  
@@ -257,12 +144,12 @@ namespace MarkdownSharpTests
             Console.WriteLine(@"MarkdownSharp v" + new MarkdownSharp.Markdown().Version + " benchmark, takes 10 ~ 30 seconds...");
             Console.WriteLine();
 
-            Benchmark(FileContents(Path.Combine("benchmark", "markdown-example-short-1.text")), 4000);
-            Benchmark(FileContents(Path.Combine("benchmark", "markdown-example-medium-1.text")), 1000);
-            Benchmark(FileContents(Path.Combine("benchmark", "markdown-example-long-2.text")), 100);
-            Benchmark(FileContents(Path.Combine("benchmark", "markdown-readme.text")), 1);
-            Benchmark(FileContents(Path.Combine("benchmark", "markdown-readme.8.text")), 1);
-            Benchmark(FileContents(Path.Combine("benchmark", "markdown-readme.32.text")), 1);
+            Benchmark(Utilities.FileContents(Path.Combine("benchmark", "markdown-example-short-1.text")), 4000);
+            Benchmark(Utilities.FileContents(Path.Combine("benchmark", "markdown-example-medium-1.text")), 1000);
+            Benchmark(Utilities.FileContents(Path.Combine("benchmark", "markdown-example-long-2.text")), 100);
+            Benchmark(Utilities.FileContents(Path.Combine("benchmark", "markdown-readme.text")), 1);
+            Benchmark(Utilities.FileContents(Path.Combine("benchmark", "markdown-readme.8.text")), 1);
+            Benchmark(Utilities.FileContents(Path.Combine("benchmark", "markdown-readme.32.text")), 1);
         }
 
         /// <summary>
@@ -294,7 +181,8 @@ namespace MarkdownSharpTests
         /// </summary>
         static void UnitTests()
         {
-            log4net.Config.XmlConfigurator.Configure();
+            /// TODO Implement Log4net
+            //log4net.Config.XmlConfigurator.Configure();
 
             string testAssemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
 
@@ -333,6 +221,5 @@ namespace MarkdownSharpTests
             if (string.IsNullOrEmpty(e.Data)) return;
             Console.WriteLine(e.Data);
         }
-
     }
 }
