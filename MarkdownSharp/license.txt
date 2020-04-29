@@ -1,41 +1,34 @@
-﻿
-// * MarkdownSharp
-// * -------------
-// * a C# Markdown processor
-// *
-// * Markdown is a text-to-HTML conversion tool for web writers
-// * Copyright(c) 2004 John Gruber
-// * http://daringfireball.net/projects/markdown/
-// *
-// * Markdown.NET
-// * Copyright (c) 2004-2009 Milan Negovan
-// * http://www.aspnetresources.com
-// * http://aspnetresources.com/blog/markdown_announced.aspx
-// * 
-// * MarkdownSharp
-// * Copyright (c) 2009-2011 Jeff Atwood
-// * http://stackoverflow.com
-// * http://www.codinghorror.com/blog/
-// * http://code.google.com/p/markdownsharp/
-// * 
-// * History: Milan ported the Markdown processor to C#. He granted license to me so I can open source it
-// * and let the community contribute to and improve MarkdownSharp.
-// * 
-// * 
-// * MarkdownSharp (.NET Core)
-// * Copyright(c) 2017 Jason Gaylord
-// * http://jasongaylord.com
-// * https://github.com/jasongaylord/markdownsharp
-// *
-// * History: I ported Jeff's and Milan's MarkdownSharp to.NET Core and migrated the code from Google Code
-//* over to GitHub.Also migrated the tests from nunit to MSTest.
+﻿MarkdownSharp
+-------------
+a C# Markdown processor
 
-//*
+Markdown is a text-to-HTML conversion tool for web writers
+Copyright(c) 2004 John Gruber
+http://daringfireball.net/projects/markdown/
+
+Markdown.NET
+Copyright (c) 2004-2009 Milan Negovan
+http://www.aspnetresources.com
+http://aspnetresources.com/blog/markdown_announced.aspx
+
+MarkdownSharp
+Copyright (c) 2009-2011 Jeff Atwood
+http://stackoverflow.com
+http://www.codinghorror.com/blog/
+http://code.google.com/p/markdownsharp/
+
+History: Milan ported the Markdown processor to C#. He granted license to me so I can open source it
+and let the community contribute to and improve MarkdownSharp.
 
 
-#region Copyright and license
+MarkdownSharp (.NET Core)
+Copyright(c) 2017-2020 Jason Gaylord
+http://jasongaylord.com
+https://github.com/jasongaylord/markdownsharp
 
-/*
+History: I ported Jeff's and Milan's MarkdownSharp to.NET Core and migrated the code from Google Code
+over to GitHub. Also migrated the tests from nunit to MSTest.
+
 
 Copyright (c) 2009 - 2010 Jeff Atwood
 
@@ -89,6 +82,3 @@ profits; or business interruption) however caused and on any theory of
 liability, whether in contract, strict liability, or tort (including
 negligence or otherwise) arising in any way out of the use of this
 software, even if advised of the possibility of such damage.
-*/
-
-#endregion

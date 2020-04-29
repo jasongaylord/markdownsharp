@@ -8,6 +8,7 @@
     <Authors>Jason Gaylord, Jeff Atwood, Milan Negovan, John Gruber</Authors>
     <Description>MarkdownSharp is a Markdown library to transform Markdown to HTML.</Description>
     <Copyright />
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/jasongaylord/markdownsharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jasongaylord/markdownsharp</RepositoryUrl>
     <PackageTags>markdown</PackageTags>
@@ -21,11 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="license\license.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="license\license.txt" />
+    <None Include="license.txt" Pack="true" PackagePath="$(PackageLicenseFile)"/>
   </ItemGroup>
 
 </Project>
