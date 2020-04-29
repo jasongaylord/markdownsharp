@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Company>Jason Gaylord</Company>
     <Authors>Jason Gaylord, Jeff Atwood, Milan Negovan, John Gruber</Authors>
     <Description>MarkdownSharp is a Markdown library to transform Markdown to HTML.</Description>
