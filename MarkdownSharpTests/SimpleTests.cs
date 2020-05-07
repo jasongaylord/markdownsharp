@@ -4,9 +4,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace MarkdownSharpTests
 {
     [TestClass]
-    public class UnitTest1
+    public class SimpleTests
     {
-        private Markdown m = new Markdown();
+        private readonly Markdown m = new Markdown();
 
         [TestMethod]
         public void Bold()

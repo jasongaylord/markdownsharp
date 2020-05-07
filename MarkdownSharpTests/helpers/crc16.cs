@@ -3,11 +3,11 @@
 /// </summary>
 
 namespace MarkdownSharpTests
-{ 
-public class Crc16
 {
-    const ushort polynomial = 0xA001;
-    ushort[] table = new ushort[256];
+    public class Crc16
+    {
+        const ushort polynomial = 0xA001;
+        readonly ushort[] table = new ushort[256];
 
     public ushort ComputeChecksum(byte[] bytes)
     {
