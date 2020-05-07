@@ -1,18 +1,11 @@
-﻿using MarkdownSharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MarkdownSharpTests
 {
     [TestClass]
     public class MDTestTests
     {
-        const string folder = "testfiles.mdtest_1._1";
+        //const string folder = "testfiles.mdtest_1._1";
 
         /// TODO Migrate away from nunit
 
@@ -48,10 +41,10 @@ namespace MarkdownSharpTests
         //}
 
 
-        [TestMethod]
+        /*[TestMethod]
         public void Test(string actualName, string expectedName, string actual, string expected)
         {
             Assert.AreEqual(expected, actual, "Mismatch between '{0}' and the transformed '{1}'.", actualName, expectedName);
-        }
+        }*/
     }
 }

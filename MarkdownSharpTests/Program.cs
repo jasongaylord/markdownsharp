@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace MarkdownSharpTests
 {
@@ -54,7 +51,7 @@ namespace MarkdownSharpTests
             var m = new MarkdownSharp.Markdown();
 
             Console.WriteLine();
-            Console.WriteLine(@"MarkdownSharp v" + m.Version + @" test run on " + Path.DirectorySeparatorChar + testfolder);
+            Console.WriteLine(@"MarkdownSharp v" + MarkdownSharp.Markdown.Version + @" test run on " + Path.DirectorySeparatorChar + testfolder);
             Console.WriteLine();
 
             string path = Path.Combine(Utilities.ExecutingAssemblyPath, Path.Combine("testfiles", testfolder));
@@ -141,7 +138,7 @@ namespace MarkdownSharpTests
 
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine(@"MarkdownSharp v" + new MarkdownSharp.Markdown().Version + " benchmark, takes 10 ~ 30 seconds...");
+            Console.WriteLine(@"MarkdownSharp v" + MarkdownSharp.Markdown.Version + " benchmark, takes 10 ~ 30 seconds...");
             Console.WriteLine();
 
             Benchmark(Utilities.FileContents(Path.Combine("benchmark", "markdown-example-short-1.text")), 4000);
