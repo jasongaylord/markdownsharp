@@ -10,7 +10,10 @@
     <Copyright />
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/jasongaylord/markdownsharp</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/jasongaylord/markdownsharp</RepositoryUrl>
+    <RepositoryUrl>https://github.com/jasongaylord/markdownsharp.git</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageTags>markdown</PackageTags>
     <RepositoryType>Git</RepositoryType>
     <PackageId>MarkdownSharpCore</PackageId>
@@ -30,6 +33,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
   </ItemGroup>
 
 </Project>
