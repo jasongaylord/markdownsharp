@@ -21,13 +21,13 @@ History: Milan ported the Markdown processor to C#. He granted license to me so 
 and let the community contribute to and improve MarkdownSharp.
 
 
-MarkdownSharp (.NET Core)
-Copyright(c) 2017-2020 Jason Gaylord
-http://jasongaylord.com
+MarkdownSharp (.NET 6.x)
+Copyright(c) 2017-2023 Jason Gaylord
+https://www.jasongaylord.com
 https://github.com/jasongaylord/markdownsharp
 
 History: I ported Jeff's and Milan's MarkdownSharp to.NET Core and migrated the code from Google Code
-over to GitHub. Also migrated the tests from nunit to MSTest.
+over to GitHub. Also migrated the tests from nunit to MSTest. I have then updated it to .NET 6.0.
 
 
 Copyright (c) 2009 - 2010 Jeff Atwood
