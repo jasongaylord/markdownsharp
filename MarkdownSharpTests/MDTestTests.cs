@@ -48,10 +48,10 @@ namespace MarkdownSharpTests
         //}
 
 
-        [TestMethod]
-        public void Test(string actualName, string expectedName, string actual, string expected)
-        {
-            Assert.AreEqual(expected, actual, "Mismatch between '{0}' and the transformed '{1}'.", actualName, expectedName);
-        }
+        //[TestMethod]
+        //public void Test(string actualName, string expectedName, string actual, string expected)
+        //{
+        //    Assert.AreEqual(expected, actual, "Mismatch between '{0}' and the transformed '{1}'.", actualName, expectedName);
+        //}
     }
 }

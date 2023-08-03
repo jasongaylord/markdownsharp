@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-
+using Microsoft.Extensions.Configuration;
 /* See _CopyrightAndLicense.cs for all copyright and license notes */
 
 namespace MarkdownSharp
@@ -42,27 +43,29 @@ namespace MarkdownSharp
             /// TODO Load config settings from options
             if (!loadOptionsFromConfigFile) return;
 
-            var settings = new Dictionary<string, string>(); // ConfigurationManager.AppSettings;
+            var config = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("markdown.json").Build();
+            var settings = config.AsEnumerable().ToDictionary(k => k.Key, v => v.Value);
+
             foreach (string key in settings.Keys)
             {
                 switch (key)
                 {
-                    case "Markdown.AutoHyperlink":
+                    case "Markdown:AutoHyperlink":
                         _autoHyperlink = Convert.ToBoolean(settings[key]);
                         break;
-                    case "Markdown.AutoNewlines":
+                    case "Markdown:AutoNewlines":
                         _autoNewlines = Convert.ToBoolean(settings[key]);
                         break;
-                    case "Markdown.EmptyElementSuffix":
+                    case "Markdown:EmptyElementSuffix":
                         _emptyElementSuffix = settings[key];
                         break;
-                    case "Markdown.LinkEmails":
+                    case "Markdown:LinkEmails":
                         _linkEmails = Convert.ToBoolean(settings[key]);
                         break;
-                    case "Markdown.StrictBoldItalic":
+                    case "Markdown:StrictBoldItalic":
                         _strictBoldItalic = Convert.ToBoolean(settings[key]);
                         break;
-                    case "Markdown.AsteriskIntraWordEmphasis":
+                    case "Markdown:AsteriskIntraWordEmphasis":
                         _asteriskIntraWordEmphasis = Convert.ToBoolean(settings[key]);
                         break;
                 }

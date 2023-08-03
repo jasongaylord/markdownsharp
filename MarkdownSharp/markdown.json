@@ -1,0 +1,10 @@
+{
+  "Markdown": {
+    "AutoHyperlink": true,
+    "AutoNewlines": true,
+    "EmptyElementSuffix": ">",
+    "LinkEmails": false,
+    "StrictBoldItalic": true,
+    "AsteriskIntraWordEmphasis": true
+  }
+}
